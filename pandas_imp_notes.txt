@@ -1,0 +1,95 @@
+Pandas 				: Data Manipulation 
+
+NumPy				: for Numerical computing
+
+Matplotlib/seaborn/Plotly	: data visulaization
+
+Scikit-learn			: ML (Machine Learning)
+
+---------------------------------------------------------------
+
+Data in Pandas:-
+----------------
+
+		Data structures
+		---------------
+		1. Series	: one-dim
+		2. DataFrame	: two-dim
+		3. Panel	
+
+
+
+Task 1:
+=======
+	Dataset importing into DataFrame
+	--------------------------------
+	1. csv		:	pd.read_csv('path/filename.csv')
+	2. json		:	pd.read_json('path/filename.json')
+	3. excel	:	pd.read_excel('path/filename.xlsx')
+	4. txt		:	pd.read_csv('path/filename.txt', sep=',')
+					* comma 	(sep =',')
+					* tab   	(sep = '\t')
+					* whitespace	(sep = '\s')
+					* colon		(sep = ':')
+	........
+
+Task 2:
+=======
+	outputting a DataFrame into a csv
+	----------------------------------
+	* DataFrame to CSV 	: df.to_csv('filename.csv',index=False)
+	* DataFrame to JSON 	: df.to_json('filename.json')
+	* DataFrame to TXT	: heart_disease_df.to_csv('/heart.txt', header=df.columns, index=None, sep=' ')
+
+
+Task 3:
+=======
+	Viewing Data from DataFrame
+	---------------------------
+	(view the first few pr last few rows of a dataframe)
+
+	1. head()
+	2. tail()
+
+Task 4:
+=======
+	undesrtanding data using : describe()
+	-------------------------------------
+	describe() = used to prints the summary statistics of all the numeric columns
+			count
+			std
+			range
+			quartiles
+			mean
+
+	* info()
+	* shape()
+
+Task 5:
+=======
+
+	Handling missing values using pandas (isnull())
+	-----------------------------------------------
+	
+
+Task 6:
+=======
+	slicing & Extracting data in pandas
+	-----------------------------------
+
+Task 7:
+=======
+	Pivoting - aggregation
+		
+
+Task 8:
+-------
+	Aggreagtions
+		groupby()
+
+Task 9:
+-------
+	Data visualization (Plotting)
+		matplotlib.pylot, seaborn
+	
+	
