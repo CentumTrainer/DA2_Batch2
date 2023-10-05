@@ -1,0 +1,58 @@
+
+print('Welcome to R Stusdio')
+
+#Statement used to display 'Hello, World!' on screen
+print("Hello, World!")
+
+msg <- 'This is test string'
+msg
+num1 = 10
+class(num1)
+
+num1 <- as.integer(num1)
+class(num1)
+
+
+
+x = 3
+y = 5
+a = x > y
+a
+
+myvar <- 0:9
+myvar
+
+567/78
+
+sqrt(81)
+
+
+#============================================
+#Data types in R
+#Vector is an object that contains  a set of values called it's elements.
+
+#numeric vector
+stud_marks <- c(45,89,90,34,56)
+stud_marks
+class(stud_marks)
+
+#character vector
+employee <- c('John','Williams','Pattrick')
+employee
+class(employee)
+  
+#Factors: Sp. data str. used to store categorical variable.
+gender <- c(1,2,2,1,1,1,2,2,2,1,1,1)
+gender <- factor(gender ,levels = c(1,2), labels=c('Male','Female'))
+table(gender)
+
+#Matrices:
+#All values in columns in a matrix must have the same mode(numeric,character..etc)
+#and same length.
+#cbind function joins columns together into a matrix.
+
+r1 <- c(1,2,5)
+r2 <- c(4,7,8)
+r3 <- c(9,3,6)
+mymat <- cbind(r1,r2,r3)
+mymat
