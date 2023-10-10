@@ -1,0 +1,435 @@
+1. Intro of R Prog., history
+2. Getting started with R (installation & R  statements)
+	A. Basic operation
+ 
+3. Data types(structures) in R
+	1. vector
+	2. factor
+	3. matrices
+	4. Dataframe - two/multi dim
+	5. lists - 
+	6. array
+
+4. create a sample (dummy) in R - (dataframe - seq,letters,random)
+	* Operations on Dataframes
+
+
+5. Importing Data in R
+	a) read a data from csv file
+	
+		mydata <- read.csv("d:/mydata.csv",header=FALSE)
+
+	b) read BIG CSV file	
+		
+		step1. how to load a library - 
+			
+			library(data.table)
+		step2.	
+			mydata <- fread("d:/mydata.csv")
+
+		//if you have the header row in csv file
+
+			mydata <- fread("d:/mydata.csv",header=TRUE)
+
+	c) reading a tab-delimited text file
+		
+		mydata <- read.table("d:/product.csv")
+
+	d) reading excel file
+		
+		step1. install the package once
+			
+			install.packages("readxl")
+		
+		step2. loading of package
+			library(readxl)
+	 
+		
+		step3. define the path & sheetname
+			
+			read_excel("d:/Book1.xlsx",sheet="sheet6")
+
+6. Exporting Data R
+		
+		a). export/write comma-delimited csv file
+			write.csv(dfname,"d:/test.csv")
+		
+		b). writing tab-delimited csv file
+			write.table(dfname,"d:/test.csv",sep="\t")
+
+		c). write excel file
+			
+			step1. install the package
+				install.packages("xlsx")
+
+			step2. load the package
+				library("xlsx")
+			
+			step3. write into excel file
+				write.xlsx(dfname, "d:/text.xlsx")
+
+-------------------------------------------------------------------------
+			
+7. Data exploration with R
+			
+	step1. sample data
+	
+		mydata = data.frame(
+					Q1 = sample(1:6, 100 ,replace = TRUE), 
+					Q2=sample(1:6,100,replace=TRUE),
+					Q3=sample(1:6,100,replace=TRUE),
+					Q4=sample(1:6,100,replace=TRUE),
+					Age = sample(1:3,100,replace=TRUE)
+			 	   )
+
+	A. Calculate basic descriptive statistics
+		
+		summary(mydata)
+		
+		six points- 
+				1. min
+				2. 1st quartile
+
+					6 7 8 9 10 15 16  16  20 20 23 33 50 58 104
+					------ ---------  Q2  ---------  ----------
+					      Q1                       Q3
+
+
+				3. Median
+				4. Mean
+				5. 3rd quartile
+				6. max
+	B. List name of variable in a dataset
+		
+		names(mydata)
+	C. how to find total no. of rows in a dataframe
+			 	
+		nrow(mydata)
+---------------------------------------------------------
+
+8. Data Manipulation with R
+
+	A. Replacing / Recoding values
+		
+		> mydata = data.frame(Course=c('C','C++','Python','Java','R prog.','PHP'), Duration=c		(20,24,40,120,160,60))
+
+		> View(mydata)
+
+		> #replacing values in R
+		> mydata$Duration[mydata$Duration==40] <- 80
+ 
+
+
+	How to use IF ELSE statement in R
+	==================================
+
+	Sample Data:-
+	-------------
+
+	mydata = data.frame(Course=c('C','C++','Python','Java','R prog.','PHP'), Duration=c	(20,24,40,120,160,60))
+	View(mydata)
+
+	#replacing values in R
+	mydata$Duration[mydata$Duration==40] <- 80
+
+	samples = data.frame(x=c(rep(1:10)),y=letters[1:10])
+	View(smaples)
+
+	# if a value of variable x is greater than 6, create a new variable called t1 and write 2 		against the corresponding values else make it 1.
+	  samples$t1 = ifelse(samples$x > 6, 2 , 1)
+	  smaples$t1 = ifelse(smaples$x > 6, 2 , 1)
+	
+	employee = data.frame(Name=c('John','Smith','Harry','Kelly','Allen'),Salary=		(25000,20000,35000,40000,24000))
+	View(employee)
+
+
+	#Give the bonus to each employee if salary is greater than 25000 then bonus amount is 5000 otherwise bonu will be 3000
+
+	employee$Bonus = ifelse(employee$Salary > 25000, 5000,  3000)
+
+	employee$TotalSal = employee$Salary+employee$Bonus
+	
+	
+	employee = data.frame(Name=c('John','Smith','Harry','Kelly','Allen'),Salary=c	(25000,20000,35000,40000,24000),Dept=c('admin','sales','sales','admin','marketing'))
+	
+	#Give the bonus to each employee if salary is greater than 25000 & dept is admin then bonus amount is 5000 otherwise bonu will be 3000
+	
+	#How to use AND Condition
+	employee$Bonus = ifelse(employee$Salary > 25000 & employee$Dept=='admin', 5000,  3000)
+	savehistory("C:/Users/Rajesh/Desktop/aa.Rhistory")
+	
+
+
+	employee = data.frame(Name=c('John','Smith','Harry','Kelly','Allen'),Salary=c(25000,20000,35000,40000,24000),Dept=c('admin','sales','sales','admin','marketing'))
+> #Give the bonus to each employee if salary is greater than 25000 & dept is admin then bonus amount is 5000 otherwise bonu will be 3000 
+> #How to use AND Condition
+> employee$Bonus = ifelse(employee$Salary > 25000 & employee$Dept=='admin', 5000,  3000)
+> 
+------------------------------------------------------------------------------------------
+
+	C. Renaming variables/columns
+		
+		step1. install dplyr package
+		
+		step2. Load the  package
+
+		
+		#how to rename column in a dataframe
+		syntax:-
+		> mydata <- rename(dataframe_name , new_name = old_column_name)
+
+		example:-
+		> mydata <- rename(mydata, Course_Name=Course)	
+
+
+
+	D. Keeping and Dropping variable/columns
+	
+		> # we keep only first two columns
+		> mydata1 = mydata[1:2]
+		> View(mydata1)
+
+		> # we keep first and third through 5 variable
+			> mydata2 = mydata[c(1,3:5)]
+			> View(mydata2)
+			> View(mydata)
+			> mydata2
+   				Course stud_qty credit price
+				1       C        5     18  3000
+				2     C++       20     24  4500
+				3  Python       35     34 12000
+				4    Java       25     12 20000
+				5 R prog.       14     16 18000
+				6     PHP       15     10 12000
+
+		> mydata3 = mydata[c(1,3,5)]
+		> View(mydata3)
+		> View(mydata)
+	
+		> mydata3 = mydata[c('Course','stud_qty','price')]
+		> mydata3
+		
+		> #Deleting a perticular column
+		> mydata[-5]
+		
+		another way to delete a column/variable
+		> mydata$credit <-  NULL
+		
+		> #deleting multiple columns
+		> mydata[-(2:3)]
+
+
+	E. subset data(selecting obs.)
+		
+		newdata = data.frame(Name=ifelse(sign(rnorm(25))==-1,'ABC','DEF'), age=sample(1:25))
+
+		#how to view only 10 records/obs
+		> newdata[1:10,]
+		
+		> #selecting values where age is equal to 3
+		> newdata<- subset(newdata,age==3)		
+
+		#conditional ststement (AND) while selecting obs.
+		> subset(newdata, Name=='ABC' & age ==3)	
+
+
+		#Keeping only missing records
+		>newdata = data.frame(Course=c('C','C++','Python','Java','R prog.','PHP'), Duration=c			(20,NA,40,NA,160,60))
+		> newdata1 <-subset(newdata,is.na(Duration))
+		> newdata1
+   			Course Duration
+		1:    C++       NA
+		2:   Java       NA
+		
+		#Keeping only non-missing records
+ 		> newdata1 <-subset(newdata,!is.na(Duration))
+		> newdata1
+
+	
+	F. sort
+		
+		> x =sample(1:50)
+		> x
+ 			[1] 49 41 23 44 43  6 42 47  1  7 36 10 18  9 34  3 15 12 27  2 16 14 39 21
+			[25] 22 11  4  5 28 40 19 33 38 25 30 46 32 50 31 17 48 29  8 24 20 45 37 26
+			[49] 13 35
+		> x= sort(x,decreasing=TRUE)
+		> x 
+
+		> mydata2 = data.frame(Gender=ifelse(sign(rnorm(25))==-1,'F','M'), age=sample(1:25))
+		> mydata2
+
+		> mydata2.sorted<- mydata2[order(mydata2$Gender),]
+		> mydata2
+
+		> mydata2.sorted<- mydata2[order(mydata2$Gender),]
+		> View(mydata2.sorted)
+	
+		> mydata3 = mydata2[order(mydata2$Gender),]
+		> View(mydata3)
+
+		>#sorting gender in decreasing order....
+		> mydata3 = mydata2[order(mydata2$Gender,decreasing = TRUE),]
+
+	
+	G. Value Labeling-
+		
+		> View(mydata2)
+		> gender = factor(mydata2$Gender)
+		> gender
+ 			[1] F F M M F F F M M M F F M M F F F F F F F M F M F
+			Levels: F M
+		> mydata2$Gender<- factor(mydata2$Gender,levels=c('F','M'),labels=c(1,2))
+		> View(mydata2.sorted)
+		> View(mydata2)
+
+	H. Dealing with missing data
+		
+		#how to check total missing values in a columns
+		> colSums(is.na(mydata))
+  		Course Duration 
+       		0        2
+		
+		#how to check total missing values in a rows
+		> rowSums(is.na(mydata))
+		[1] 0 1 0 1 0 0
+		> mydata=cbind(mydata,Price=c(2000,NA,5000,4500,NA,8000))
+		> rowSums(is.na(mydata))
+		[1] 0 2 0 1 1 0
+
+	I. Removing Duplicates:-
+
+		data =read.table(text="X	Y	Z
+		6	5	0
+		6	5	0
+		6	1	5
+		8	5	3
+		1	NA	1
+		8	7	2
+		2	0	2
+		",header =TRUE)
+	
+		> mydata1 <- unique(data)
+	
+		>#removing duplicates by 'category' column
+		> meal_data = fread("d:/meal_info.csv")
+		> View(meal_data)
+		> category_data = subset(meal_data,!duplicated(meal_data[,"category"]))
+		> View(category_data)
+
+	J. Frequency of a vector:-
+		
+		> course <- c('C','C++','java','java','C','java','C')
+		> table(course)
+			course
+   			C  C++ java 
+   			3    1    3 
+
+
+9. Loop in R
+	
+	1. For loop 
+	2. While loop
+	3. apply family of functions Apply,Lapply, Saaply
+
+
+	1. Apply function
+		
+		syntax:-
+			apply(dataframe ,  margin(1-row,2-coloumn , fun , ...... ))
+
+
+
+		
+		> dat = data.frame(x=c(1:5,NA),z=c(1,1,0,0,NA,0),y=5*c(1:6))
+		> View(dat)
+		> #find max value of each row
+		> apply(dat,1,max,na.rm=TRUE)
+			[1]  5 10 15 20 25 30
+		> apply(dat,1,min,na.rm=TRUE)
+			[1] 1 1 0 0 5 0
+
+		> #find max value of each row column'
+		> apply(dat,2,min,na.rm=TRUE)
+			x z y 
+			1 0 5 
+		> apply(dat,2,max,na.rm=TRUE)
+ 			x  z  y 
+ 			5  1 30 
+		
+	2. Lapply function:-
+		
+		syntax:-
+		------
+			lapply(dataframe, fun , ......)
+
+		> lapply(dat,function(x) median(x,na.rm=TRUE))
+			$x
+			[1] 3
+
+			$z
+			[1] 0
+
+			$y
+			[1] 17.5
+
+	3. Sapply function:-
+		
+		syntax:-
+		------	 > sapply(dat,function(x) sum(is.na(x)))
+				x z y 
+				1 1 0 
+			> sapply(dat,function(x) sum(x))
+  				x   z   y 
+ 				NA  NA 105 
+			> sapply(dat,function(x) sum(x,na.rm=TRUE))
+ 				 x   z   y 
+ 				15   2 105 
+
+	4. for loop-
+		
+		> data <- seq(1:30)
+		> print("This loop calculates the square of the first 10 elements of vector data")
+			[1] "This loop calculates the square of the first 10 elements of vector data"
+		> res <- 0
+		> for(i in 1:10){ res[i] <- data[i]*data[i]}
+		> res
+ 			[1]   1   4   9  16  25  36  49  64  81 100
+		
+		
+		example:-
+		=======
+						      1  2 3  4  5
+		> data <- seq(1:30)  //      data =c(20,45,67,89,90)
+		> # using for loop printing even vaues
+		> for(i in data)
+		  {
+			if(i%%5 == 0)
+			{
+			 	print(i)
+			}
+		  }
+
+
+
+10. Data visualization on  R
+=============================	
+
+
+		Base R Graphics
+		R provides some built-in functions which are included in the graphics package for data 		visualization in R.
+
+		In this tutorial, we are going to use the default mtcars dataset for data 
+		visualization in R.
+
+		#To load graphics package
+		library("graphics")
+		
+		#To load datasets package
+		library("datasets")
+
+		#To load mtcars dataset
+		data(mtcars)
+
+		#To analyze the structure of the dataset
+		str(mtcars)
